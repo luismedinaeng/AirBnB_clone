@@ -188,8 +188,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_show(self.remove(l_list))
             elif l_list[1][:7] == "destroy":
                 self.do_destroy(self.remove(l_list))
-            else:
-                cmd.Cmd.defualt(self, line)
+        else:
+            cmd.Cmd.default(self, line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

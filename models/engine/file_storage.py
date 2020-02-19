@@ -44,6 +44,12 @@ class FileStorage():
 
         if ser_d.__len__() != 0:
             from models.base_model import BaseModel
+            from models.user import User
+            from models.state import State
+            from models.city import City
+            from models.amenity import Amenity
+            from models.place import Place
+            from models.review import Review
             for k, v in ser_d.items():
                 value = eval(v["__class__"])(**v)
                 self.__objects[k] = value

@@ -133,6 +133,7 @@ class HBNBCommand(cmd.Cmd):
             if value.__class__.__name__ == clas[0]:
                 count += 1
         print(count)
+
     def do_update(self, line):
         """Updates an instance based on the class
         name and id by adding or updating attribute
@@ -164,8 +165,7 @@ class HBNBCommand(cmd.Cmd):
             obj.save()
         except Exception:
             obj.__dict__[commands[2]] = commands[3]
-            obj.save()
-            
+
     def remove(self, line_list):
         line_list = str(line_list).replace("update(", "")
         line_list = str(line_list).replace("show(", "")
@@ -177,6 +177,7 @@ class HBNBCommand(cmd.Cmd):
             string += line_list[i]
             string += " "
         return(string)
+
     def default(self, line):
         l_list = line.split('.')
         if len(l_list) >= 2:

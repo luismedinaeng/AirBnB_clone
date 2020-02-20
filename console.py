@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import cmd
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -119,6 +120,19 @@ class HBNBCommand(cmd.Cmd):
                 objs_list.append(str(value))
         print(objs_list)
 
+    def do_count(self, line):
+        """Method that counts the instance of a class
+        """
+        count = 0
+        clas = line.split()
+        objs = storage.all()
+        if not clas[0] in self.classes:
+            print("** class doesn't exist **")
+            return None
+        for key, value in objs.items():
+            if value.__class__.__name__ == clas[0]:
+                count += 1
+        print(count)
     def do_update(self, line):
         """Updates an instance based on the class
         name and id by adding or updating attribute
@@ -151,6 +165,31 @@ class HBNBCommand(cmd.Cmd):
         except Exception:
             obj.__dict__[commands[2]] = commands[3]
             obj.save()
+            
+    def remove(self, line_list):
+        line_list = str(line_list).replace("update(", "")
+        line_list = str(line_list).replace("show(", "")
+        line_list = str(line_list).replace("destroy(", "")
+        line_list = line_list.split(',')
+        string = ""
+        for i in range(len(line_list)):
+            line_list[i] = re.sub(r"[^a-zA-Z0-9-_]", "", line_list[i])
+            string += line_list[i]
+            string += " "
+        return(string)
+    def default(self, line):
+        l_list = line.split('.')
+        if len(l_list) >= 2:
+            if l_list[1] == "all()":
+                self.do_all(l_list[0])
+            if l_list[1] == "count()":
+                self.do_count(l_list[0])
+            elif l_list[1][:4] == "show":
+                self.do_show(self.remove(l_list))
+            elif l_list[1][:7] == "destroy":
+                self.do_destroy(self.remove(l_list))
+            else:
+                cmd.Cmd.defualt(self, line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

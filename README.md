@@ -19,5 +19,7 @@ It objective is to understand the file manage, persistance in a program and the 
 
 ## Authors
 
+|               |                       |
+| ---------     | --------              |
 | Nicolas Gomez | negomezte@unal.edu.co |
 | Luis Medina   | malf95@hotmail.com    |

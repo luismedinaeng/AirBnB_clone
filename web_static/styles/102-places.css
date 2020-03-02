@@ -189,9 +189,6 @@ ul {
 
 /* Responsive */
 @media (max-width: 400px) {
-		/* .places article { */
-		/* 		width: auto; */
-		/* } */
 
 		.places .information {
 				height: auto;
